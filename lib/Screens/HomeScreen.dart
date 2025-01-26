@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_fution_fork_mad/Screens/AccountScreen.dart';
 import 'package:the_fution_fork_mad/Screens/CartsScreen.dart';
 import 'package:the_fution_fork_mad/Screens/Menupage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class homepage extends StatefulWidget {
   const homepage({super.key});
@@ -42,6 +42,8 @@ class _HomepageState extends State<homepage> {
     setState(() {
       _isDarkMode = value;
     });
+
+    // Save the bool value to shared preferences
     _saveTheme(value); // Save the theme preference
   }
 
@@ -54,10 +56,9 @@ class _HomepageState extends State<homepage> {
     // Handle item tap actions here
     switch (index) {
       case 0:
-        // Home tab selected - No need to navigate, just update the selectedIndex
+        // Home tab selected - No need to navigate
         break;
       case 1:
-        // Carts tab selected
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -99,10 +100,8 @@ class _HomepageState extends State<homepage> {
           backgroundColor: Colors.white,
           elevation: 0,
           title: const Center(
-            // Center the text within the AppBar
             child: Column(
-              mainAxisAlignment: MainAxisAlignment
-                  .center, // Vertically center the text within the Column
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment:
                   CrossAxisAlignment.center, // Horizontally center the text
               children: [
@@ -182,7 +181,7 @@ class _HomepageState extends State<homepage> {
                 children: [
                   // First Column with a fixed width and gap
                   SizedBox(
-                    width: 150, // Set a custom width for the column
+                    width: 150,
                     child: Column(
                       children: [
                         Image.asset('assets/images/burger.jpg',
@@ -200,11 +199,10 @@ class _HomepageState extends State<homepage> {
                   ),
 
                   // Add gap between columns
-                  const SizedBox(width: 20), // Adjust gap width
+                  const SizedBox(width: 20),
 
-                  // Second Column with a fixed width and gap
                   SizedBox(
-                    width: 150, // Set a custom width for the column
+                    width: 150,
                     child: Column(
                       children: [
                         Image.asset('assets/images/sashimi.jpg',
@@ -249,7 +247,7 @@ class _HomepageState extends State<homepage> {
                   ),
 
                   // Add gap between columns
-                  const SizedBox(width: 20), // Adjust gap width
+                  const SizedBox(width: 20),
 
                   // Second Column with a fixed width and gap
                   SizedBox(
@@ -279,10 +277,8 @@ class _HomepageState extends State<homepage> {
                   height: 100,
                   child: ListView(
                     scrollDirection: Axis.horizontal,
-                    shrinkWrap:
-                        true, // Makes the ListView occupy only as much space as needed
-                    physics:
-                        const BouncingScrollPhysics(), // Optional, adds scroll physics for smoother scroll
+                    shrinkWrap: true,
+                    physics: const BouncingScrollPhysics(),
                     children: const [
                       // First Item - Pizza
                       Padding(
@@ -400,7 +396,7 @@ class _HomepageState extends State<homepage> {
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           currentIndex: _selectedIndex, // Ensure the selected index is updated
-          onTap: _onItemTapped, // Handle item tap
+          onTap: _onItemTapped,
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
