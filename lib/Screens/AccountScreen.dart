@@ -5,13 +5,15 @@ import 'Menupage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: Accpage(),
     );
   }
@@ -76,108 +78,110 @@ class _AccpageState extends State<Accpage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: const Text(
-          'Account Settings',
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
+    return MaterialApp(
+        theme: _isDarkMode ? ThemeData.dark() : ThemeData.light(),
+        home: Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.white,
+            elevation: 0,
+            title: const Text(
+              'Account Settings',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
+            centerTitle: true,
+            iconTheme: const IconThemeData(color: Colors.black),
           ),
-        ),
-        centerTitle: true,
-        iconTheme: const IconThemeData(color: Colors.black),
-      ),
-      body: ListView(
-        padding: const EdgeInsets.all(16),
-        children: <Widget>[
-          ListTile(
-            leading: const Icon(Icons.account_circle),
-            title: const Text('Change Username'),
-            onTap: () {
-              // Add functionality for changing the username
-            },
+          body: ListView(
+            padding: const EdgeInsets.all(16),
+            children: <Widget>[
+              ListTile(
+                leading: const Icon(Icons.account_circle),
+                title: const Text('Change Username'),
+                onTap: () {
+                  // Add functionality for changing the username
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.email),
+                title: const Text('Change Email'),
+                onTap: () {
+                  // Add functionality for changing the email
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.lock),
+                title: const Text('Change Password'),
+                onTap: () {
+                  // Add functionality for changing the password
+                },
+              ),
+              const Divider(),
+              const Text(
+                'Notification Settings',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              ListTile(
+                leading: const Icon(Icons.notifications),
+                title: const Text('Enable Notifications'),
+                onTap: () {
+                  // Add functionality to enable or disable notifications
+                },
+              ),
+              const Divider(),
+              const Text(
+                'Privacy Settings',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              ListTile(
+                leading: const Icon(Icons.privacy_tip),
+                title: const Text('Change Privacy Settings'),
+                onTap: () {
+                  // Add functionality for privacy settings
+                },
+              ),
+            ],
           ),
-          ListTile(
-            leading: const Icon(Icons.email),
-            title: const Text('Change Email'),
-            onTap: () {
-              // Add functionality for changing the email
-            },
+          bottomNavigationBar: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            currentIndex: _selectedIndex,
+            onTap: _onItemTapped,
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: 'Home',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.search),
+                label: 'Browse',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.shopping_cart),
+                label: 'Carts',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person),
+                label: 'Account',
+              ),
+            ],
           ),
-          ListTile(
-            leading: const Icon(Icons.lock),
-            title: const Text('Change Password'),
-            onTap: () {
-              // Add functionality for changing the password
-            },
-          ),
-          const Divider(),
-          const Text(
-            'Notification Settings',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          ListTile(
-            leading: const Icon(Icons.notifications),
-            title: const Text('Enable Notifications'),
-            onTap: () {
-              // Add functionality to enable or disable notifications
-            },
-          ),
-          const Divider(),
-          const Text(
-            'Privacy Settings',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          ListTile(
-            leading: const Icon(Icons.privacy_tip),
-            title: const Text('Change Privacy Settings'),
-            onTap: () {
-              // Add functionality for privacy settings
-            },
-          ),
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Browse',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart),
-            label: 'Carts',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Account',
-          ),
-        ],
-      ),
-      bottomSheet: Container(
-        height: 50,
-        padding: const EdgeInsets.all(10),
-        child: const Center(
-          child: Text(
-            '© 2025 Abdul Hakeem. All rights reserved.',
-            style: TextStyle(
-              color: Color.fromARGB(255, 0, 0, 0),
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
+          bottomSheet: Container(
+            height: 50,
+            padding: const EdgeInsets.all(10),
+            child: const Center(
+              child: Text(
+                '© 2025 Abdul Hakeem. All rights reserved.',
+                style: TextStyle(
+                  color: Color.fromARGB(255, 0, 0, 0),
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ),
-        ),
-      ),
-    );
+        ));
   }
 }
