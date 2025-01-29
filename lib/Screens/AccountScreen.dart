@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:the_fution_fork_mad/Screens/CartsScreen.dart';
 import 'package:the_fution_fork_mad/screens/homescreen.dart';
+import 'package:the_fution_fork_mad/theme_provider.dart';
 import 'Menupage.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,25 +29,10 @@ class Accpage extends StatefulWidget {
 
 class _AccpageState extends State<Accpage> {
   int _selectedIndex = 3;
-  bool _isDarkMode = false;
   String _username = '';
   String _email = '';
   String _password = '';
   String _oldemail = '';
-
-  @override
-  void initState() {
-    super.initState();
-    _loadTheme(); // Load theme preference on init
-  }
-
-  // Load the saved theme from SharedPreferences
-  void _loadTheme() async {
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      _isDarkMode = prefs.getBool('darkMode') ?? false; // Default to light mode
-    });
-  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -82,8 +68,12 @@ class _AccpageState extends State<Accpage> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
     return MaterialApp(
-      theme: _isDarkMode ? ThemeData.dark() : ThemeData.light(),
+      themeMode: themeProvider.themeMode,
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,

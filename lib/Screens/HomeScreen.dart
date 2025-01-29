@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:the_fution_fork_mad/Screens/accountscreen.dart';
 import 'package:the_fution_fork_mad/Screens/cartsscreen.dart';
 import 'package:the_fution_fork_mad/Screens/menupage.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:the_fution_fork_mad/theme_provider.dart';
 
 class homepage extends StatefulWidget {
   const homepage({super.key});
@@ -13,39 +14,38 @@ class homepage extends StatefulWidget {
 
 class _HomepageState extends State<homepage> {
   int _selectedIndex = 0;
-  bool _isDarkMode = false;
 
   // Load the saved theme preference from SharedPreferences
-  @override
-  void initState() {
-    super.initState();
-    _loadTheme();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _loadTheme();
+  // }
 
-  // Load the saved theme
-  void _loadTheme() async {
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      _isDarkMode = prefs.getBool('darkMode') ??
-          false; // Default to light mode if not set
-    });
-  }
+  // // Load the saved theme
+  // void _loadTheme() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   setState(() {
+  //     _isDarkMode = prefs.getBool('darkMode') ??
+  //         false; // Default to light mode if not set
+  //   });
+  // }
 
   // Save the theme to SharedPreferences
-  void _saveTheme(bool value) async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setBool('darkMode', value);
-  }
+  // void _saveTheme(bool value) async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   prefs.setBool('darkMode', value);
+  // }
 
   // Toggle the theme
-  void _toggleTheme(bool value) {
-    setState(() {
-      _isDarkMode = value;
-    });
+  // void _toggleTheme(bool value) {
+  //   setState(() {
+  //     _isDarkMode = value;
+  //   });
 
-    // Save the bool value to shared preferences
-    _saveTheme(value); // Save the theme preference
-  }
+  //   // Save the bool value to shared preferences
+  //   _saveTheme(value); // Save the theme preference
+  // }
 
   // Function to handle item tap
   void _onItemTapped(int index) {
@@ -91,9 +91,11 @@ class _HomepageState extends State<homepage> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
     return MaterialApp(
-        themeMode: _isDarkMode ? ThemeMode.dark : ThemeMode.light,
-        theme: ThemeData.light(), // Light Theme
+        themeMode: themeProvider.themeMode,
+        theme: ThemeData.light(),
         darkTheme: ThemeData.dark(), // Dark Theme
         home: OrientationBuilder(builder: (context, orientation) {
           return Scaffold(
@@ -131,9 +133,9 @@ class _HomepageState extends State<homepage> {
               ),
               actions: [
                 Switch(
-                  value: _isDarkMode,
-                  onChanged: (bool value) {
-                    _toggleTheme(value);
+                  value: themeProvider.themeMode == ThemeMode.dark,
+                  onChanged: (value) {
+                    themeProvider.toggleTheme();
                   },
                 )
               ],

@@ -1,8 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:the_fution_fork_mad/Screens/accountscreen.dart';
+import 'package:the_fution_fork_mad/Screens/cartsscreen.dart';
 import 'package:the_fution_fork_mad/Screens/login.dart';
+import 'package:the_fution_fork_mad/Screens/menupage.dart';
+import 'package:the_fution_fork_mad/Screens/productpage.dart';
+import 'package:the_fution_fork_mad/Screens/productpage2.dart';
+import 'package:the_fution_fork_mad/Screens/productpage3.dart';
+import 'package:the_fution_fork_mad/theme_provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => ThemeProvider(),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -11,13 +24,23 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
     return MaterialApp(
-      title: 'The Fution Fork',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData.light(), // Light theme
+      darkTheme: ThemeData.dark(), // Dark theme
+      themeMode: themeProvider.themeMode, // Dynamically changes the theme
       home: const LoginPage(),
+      routes: {
+        '/cart': (context) => const CartPage(),
+        '/account': (context) => const Accpage(),
+        '/menupage': (context) => const MenuPage(),
+        '/Productpage': (context) => const Productpage(),
+        '/login': (context) => const LoginPage(),
+        '/Productpage2': (context) => const Productpage2(),
+        '/Productpage3': (context) => const Productpage3(),
+      },
     );
   }
 }

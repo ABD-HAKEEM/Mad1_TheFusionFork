@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:the_fution_fork_mad/Screens/accountscreen.dart';
 import 'package:the_fution_fork_mad/Screens/cartsscreen.dart';
 import 'package:the_fution_fork_mad/Screens/productpage2.dart';
 import 'package:the_fution_fork_mad/screens/homescreen.dart';
 import 'package:the_fution_fork_mad/screens/productpage.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:the_fution_fork_mad/theme_provider.dart';
 
 class MenuPage extends StatefulWidget {
   const MenuPage({super.key});
@@ -15,21 +16,19 @@ class MenuPage extends StatefulWidget {
 
 class _MenuPageState extends State<MenuPage> {
   int _selectedIndex = 1;
-  bool _isDarkMode = false;
 
-  @override
-  void initState() {
-    super.initState();
-    _loadTheme(); // Load theme preference on init
-  }
+  // void initState() {
+  //   super.initState();
+  //   _loadTheme(); // Load theme preference on init
+  // }
 
   // Load the saved theme from SharedPreferences
-  void _loadTheme() async {
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      _isDarkMode = prefs.getBool('darkMode') ?? false; // Default to light mode
-    });
-  }
+  // void _loadTheme() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   setState(() {
+  //     _isDarkMode = prefs.getBool('darkMode') ?? false; // Default to light mode
+  //   });
+  // }
 
   // Function to handle item tap
   void _onItemTapped(int index) {
@@ -71,10 +70,12 @@ class _MenuPageState extends State<MenuPage> {
 
   @override
   Widget build(BuildContext context) {
+     final themeProvider = Provider.of<ThemeProvider>(context);
+
     return MaterialApp(
-        themeMode: _isDarkMode ? ThemeMode.dark : ThemeMode.light,
-        theme: ThemeData.light(), // Light Theme
-        darkTheme: ThemeData.dark(), // Dark Theme
+        themeMode: themeProvider.themeMode,
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
         home: OrientationBuilder(builder: (context, orientation) {
           return Scaffold(
               appBar: AppBar(
