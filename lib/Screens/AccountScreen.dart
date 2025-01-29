@@ -160,7 +160,12 @@ class _AccpageState extends State<Accpage> {
                         // Register button
                         TextButton(
                           onPressed: () {
-                            // Handle registration logic with _username, _email, and _password
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Registration successful!'),
+                                duration: Duration(seconds: 2),
+                              ),
+                            );
                             print(
                                 'Username: $_username, Email: $_email, Email: $_password');
                             Navigator.pop(context);

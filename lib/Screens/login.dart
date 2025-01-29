@@ -23,7 +23,8 @@ class _LoginPageState extends State<LoginPage> {
         theme: ThemeData.light(),
         darkTheme: ThemeData.dark(),
         home: Scaffold(
-          body: Center(
+            body: Center(
+          child: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
@@ -159,7 +160,14 @@ class _LoginPageState extends State<LoginPage> {
                                 child: const Text('Cancel'),
                               ),
                               TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text('Registration successful!'),
+                                      duration: Duration(seconds: 2),
+                                    ),
+                                  );
+                                },
                                 child: const Text('Register'),
                               ),
                             ],
@@ -173,6 +181,6 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           ),
-        ));
+        )));
   }
 }

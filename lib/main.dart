@@ -27,11 +27,21 @@ class MyApp extends StatelessWidget {
     final themeProvider = Provider.of<ThemeProvider>(context);
 
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       theme: ThemeData.light(), // Light theme
       darkTheme: ThemeData.dark(), // Dark theme
-      themeMode: themeProvider.themeMode, // Dynamically changes the theme
-      home: const LoginPage(),
+      themeMode: themeProvider.themeMode,
+      debugShowCheckedModeBanner: false,
+      // Dynamically changes the theme
+      home: Scaffold(
+        appBar: AppBar(
+          title: Image.asset(
+            'assets/images/logo.png',
+            height: 40, // Adjust the height as needed
+          ),
+          centerTitle: true,
+        ),
+        body: const LoginPage(),
+      ),
       routes: {
         '/cart': (context) => const CartPage(),
         '/account': (context) => const Accpage(),

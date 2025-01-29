@@ -70,12 +70,12 @@ class _MenuPageState extends State<MenuPage> {
 
   @override
   Widget build(BuildContext context) {
-     final themeProvider = Provider.of<ThemeProvider>(context);
+    final themeProvider = Provider.of<ThemeProvider>(context);
 
     return MaterialApp(
         themeMode: themeProvider.themeMode,
-      theme: ThemeData.light(),
-      darkTheme: ThemeData.dark(),
+        theme: ThemeData.light(),
+        darkTheme: ThemeData.dark(),
         home: OrientationBuilder(builder: (context, orientation) {
           return Scaffold(
               appBar: AppBar(
@@ -653,281 +653,10 @@ class _MenuPageState extends State<MenuPage> {
                         ],
                       )
                     : Wrap(children: [
-                        Row(
-                          mainAxisAlignment:
-                              MainAxisAlignment.center, // Centers vertically
-                          crossAxisAlignment:
-                              CrossAxisAlignment.center, // Centers horizontally
-
-                          children: [
-                            Card(
-                              elevation: 5,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Container(
-                                width: 150,
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Image.asset(
-                                      'assets/images/burger.jpg', // Replace with your image URL
-
-                                      fit: BoxFit.cover,
-                                    ),
-                                    const SizedBox(height: 8),
-                                    const Text(
-                                      'Burger',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold),
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                    const SizedBox(height: 8),
-                                    const Text(
-                                      '\$20.00',
-                                      style: TextStyle(
-                                          color: Colors.green,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    const SizedBox(height: 8),
-                                    TextButton.icon(
-                                      onPressed: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const Productpage()),
-                                        );
-                                      },
-                                      icon: const Icon(Icons.shopping_cart,
-                                          color: Color.fromARGB(
-                                              255, 175, 76, 111)),
-                                      label: const Text('Add to Cart',
-                                          style: TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 0, 0, 0))),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Card(
-                              elevation: 5,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Container(
-                                width: 150,
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Image.asset(
-                                      'assets/images/burger.jpg', // Replace with your image URL
-
-                                      fit: BoxFit.cover,
-                                    ),
-                                    const SizedBox(height: 8),
-                                    const Text(
-                                      'Burger',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold),
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                    const SizedBox(height: 8),
-                                    const Text(
-                                      '\$20.00',
-                                      style: TextStyle(
-                                          color: Colors.green,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    const SizedBox(height: 8),
-                                    TextButton.icon(
-                                      onPressed: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const Productpage()),
-                                        );
-                                      },
-                                      icon: const Icon(Icons.shopping_cart,
-                                          color: Color.fromARGB(
-                                              255, 175, 76, 111)),
-                                      label: const Text('Add to Cart',
-                                          style: TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 0, 0, 0))),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Card(
-                              elevation: 5,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Container(
-                                width: 150,
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Image.asset(
-                                      'assets/images/burger.jpg', // Replace with your image URL
-
-                                      fit: BoxFit.cover,
-                                    ),
-                                    const SizedBox(height: 8),
-                                    const Text(
-                                      'Burger',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold),
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                    const SizedBox(height: 8),
-                                    const Text(
-                                      '\$20.00',
-                                      style: TextStyle(
-                                          color: Colors.green,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    const SizedBox(height: 8),
-                                    TextButton.icon(
-                                      onPressed: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const Productpage()),
-                                        );
-                                      },
-                                      icon: const Icon(Icons.shopping_cart,
-                                          color: Color.fromARGB(
-                                              255, 175, 76, 111)),
-                                      label: const Text('Add to Cart',
-                                          style: TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 0, 0, 0))),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Card(
-                              elevation: 5,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Container(
-                                width: 150,
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Image.asset(
-                                      'assets/images/burger.jpg', // Replace with your image URL
-
-                                      fit: BoxFit.cover,
-                                    ),
-                                    const SizedBox(height: 8),
-                                    const Text(
-                                      'Burger',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold),
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                    const SizedBox(height: 8),
-                                    const Text(
-                                      '\$20.00',
-                                      style: TextStyle(
-                                          color: Colors.green,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    const SizedBox(height: 8),
-                                    TextButton.icon(
-                                      onPressed: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const Productpage()),
-                                        );
-                                      },
-                                      icon: const Icon(Icons.shopping_cart,
-                                          color: Color.fromARGB(
-                                              255, 175, 76, 111)),
-                                      label: const Text('Add to Cart',
-                                          style: TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 0, 0, 0))),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Card(
-                              elevation: 5,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Container(
-                                width: 150,
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Image.asset(
-                                      'assets/images/burger.jpg', // Replace with your image URL
-
-                                      fit: BoxFit.cover,
-                                    ),
-                                    const SizedBox(height: 8),
-                                    const Text(
-                                      'Burger',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold),
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                    const SizedBox(height: 8),
-                                    const Text(
-                                      '\$20.00',
-                                      style: TextStyle(
-                                          color: Colors.green,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    const SizedBox(height: 8),
-                                    TextButton.icon(
-                                      onPressed: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const Productpage()),
-                                        );
-                                      },
-                                      icon: const Icon(Icons.shopping_cart,
-                                          color: Color.fromARGB(
-                                              255, 175, 76, 111)),
-                                      label: const Text('Add to Cart',
-                                          style: TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 0, 0, 0))),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          reverse: true, // Enables right-to-left scrolling
+                          child: Row(
                             mainAxisAlignment:
                                 MainAxisAlignment.center, // Centers vertically
                             crossAxisAlignment: CrossAxisAlignment
@@ -947,8 +676,7 @@ class _MenuPageState extends State<MenuPage> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Image.asset(
-                                        'assets/images/burger.jpg', // Replace with your image URL
-
+                                        'assets/images/burger.jpg',
                                         fit: BoxFit.cover,
                                       ),
                                       const SizedBox(height: 8),
@@ -1001,13 +729,12 @@ class _MenuPageState extends State<MenuPage> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Image.asset(
-                                        'assets/images/burger.jpg', // Replace with your image URL
-
+                                        'assets/images/Shushi1.jpeg',
                                         fit: BoxFit.cover,
                                       ),
                                       const SizedBox(height: 8),
                                       const Text(
-                                        'Burger',
+                                        'Shushi',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold),
                                         maxLines: 2,
@@ -1015,7 +742,7 @@ class _MenuPageState extends State<MenuPage> {
                                       ),
                                       const SizedBox(height: 8),
                                       const Text(
-                                        '\$20.00',
+                                        '\$18.00',
                                         style: TextStyle(
                                             color: Colors.green,
                                             fontWeight: FontWeight.bold),
@@ -1055,13 +782,12 @@ class _MenuPageState extends State<MenuPage> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Image.asset(
-                                        'assets/images/burger.jpg', // Replace with your image URL
-
+                                        'assets/images/sashimi.jpg',
                                         fit: BoxFit.cover,
                                       ),
                                       const SizedBox(height: 8),
                                       const Text(
-                                        'Burger',
+                                        'Sashimi',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold),
                                         maxLines: 2,
@@ -1069,7 +795,7 @@ class _MenuPageState extends State<MenuPage> {
                                       ),
                                       const SizedBox(height: 8),
                                       const Text(
-                                        '\$20.00',
+                                        '\$10.00',
                                         style: TextStyle(
                                             color: Colors.green,
                                             fontWeight: FontWeight.bold),
@@ -1109,13 +835,12 @@ class _MenuPageState extends State<MenuPage> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Image.asset(
-                                        'assets/images/burger.jpg', // Replace with your image URL
-
+                                        'assets/images/risotto.jpg',
                                         fit: BoxFit.cover,
                                       ),
                                       const SizedBox(height: 8),
                                       const Text(
-                                        'Burger',
+                                        'risotto',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold),
                                         maxLines: 2,
@@ -1123,7 +848,7 @@ class _MenuPageState extends State<MenuPage> {
                                       ),
                                       const SizedBox(height: 8),
                                       const Text(
-                                        '\$20.00',
+                                        '\$16.00',
                                         style: TextStyle(
                                             color: Colors.green,
                                             fontWeight: FontWeight.bold),
@@ -1163,13 +888,12 @@ class _MenuPageState extends State<MenuPage> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Image.asset(
-                                        'assets/images/burger.jpg', // Replace with your image URL
-
+                                        'assets/images/pizza.jpg',
                                         fit: BoxFit.cover,
                                       ),
                                       const SizedBox(height: 8),
                                       const Text(
-                                        'Burger',
+                                        'Pizza',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold),
                                         maxLines: 2,
@@ -1177,7 +901,7 @@ class _MenuPageState extends State<MenuPage> {
                                       ),
                                       const SizedBox(height: 8),
                                       const Text(
-                                        '\$20.00',
+                                        '\$23.00',
                                         style: TextStyle(
                                             color: Colors.green,
                                             fontWeight: FontWeight.bold),
@@ -1204,7 +928,291 @@ class _MenuPageState extends State<MenuPage> {
                                   ),
                                 ),
                               ),
-                            ]) // Home button
+                            ],
+                          ),
+                        ),
+                        SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            reverse: true, // Enables right-to-left scrolling
+                            child: Row(
+                                mainAxisAlignment: MainAxisAlignment
+                                    .center, // Centers vertically
+                                crossAxisAlignment: CrossAxisAlignment
+                                    .center, // Centers horizontally
+
+                                children: [
+                                  Card(
+                                    elevation: 5,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: Container(
+                                      width: 150,
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Image.asset(
+                                            'assets/images/lasagna.jpg',
+                                            fit: BoxFit.cover,
+                                          ),
+                                          const SizedBox(height: 8),
+                                          const Text(
+                                            'Lasagna',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                          const SizedBox(height: 8),
+                                          const Text(
+                                            '\$24.00',
+                                            style: TextStyle(
+                                                color: Colors.green,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          const SizedBox(height: 8),
+                                          TextButton.icon(
+                                            onPressed: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const Productpage()),
+                                              );
+                                            },
+                                            icon: const Icon(
+                                                Icons.shopping_cart,
+                                                color: Color.fromARGB(
+                                                    255, 175, 76, 111)),
+                                            label: const Text('Add to Cart',
+                                                style: TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 0, 0, 0))),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Card(
+                                    elevation: 5,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: Container(
+                                      width: 150,
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Image.asset(
+                                            'assets/images/spaghetti.jpg',
+                                            fit: BoxFit.cover,
+                                          ),
+                                          const SizedBox(height: 8),
+                                          const Text(
+                                            'Spaghetti Bolognese',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                          const SizedBox(height: 8),
+                                          const Text(
+                                            '\$12.00',
+                                            style: TextStyle(
+                                                color: Colors.green,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          const SizedBox(height: 8),
+                                          TextButton.icon(
+                                            onPressed: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const Productpage()),
+                                              );
+                                            },
+                                            icon: const Icon(
+                                                Icons.shopping_cart,
+                                                color: Color.fromARGB(
+                                                    255, 175, 76, 111)),
+                                            label: const Text('Add to Cart',
+                                                style: TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 0, 0, 0))),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Card(
+                                    elevation: 5,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: Container(
+                                      width: 150,
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Image.asset(
+                                            'assets/images/burger.jpg',
+                                            fit: BoxFit.cover,
+                                          ),
+                                          const SizedBox(height: 8),
+                                          const Text(
+                                            'Burger',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                          const SizedBox(height: 8),
+                                          const Text(
+                                            '\$20.00',
+                                            style: TextStyle(
+                                                color: Colors.green,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          const SizedBox(height: 8),
+                                          TextButton.icon(
+                                            onPressed: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const Productpage()),
+                                              );
+                                            },
+                                            icon: const Icon(
+                                                Icons.shopping_cart,
+                                                color: Color.fromARGB(
+                                                    255, 175, 76, 111)),
+                                            label: const Text('Add to Cart',
+                                                style: TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 0, 0, 0))),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Card(
+                                    elevation: 5,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: Container(
+                                      width: 150,
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Image.asset(
+                                            'assets/images/takoyaki.jpg',
+                                            fit: BoxFit.cover,
+                                          ),
+                                          const SizedBox(height: 8),
+                                          const Text(
+                                            'Takoyaki',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                          const SizedBox(height: 8),
+                                          const Text(
+                                            '\$13.00',
+                                            style: TextStyle(
+                                                color: Colors.green,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          const SizedBox(height: 8),
+                                          TextButton.icon(
+                                            onPressed: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const Productpage()),
+                                              );
+                                            },
+                                            icon: const Icon(
+                                                Icons.shopping_cart,
+                                                color: Color.fromARGB(
+                                                    255, 175, 76, 111)),
+                                            label: const Text('Add to Cart',
+                                                style: TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 0, 0, 0))),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Card(
+                                    elevation: 5,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: Container(
+                                      width: 150,
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Image.asset(
+                                            'assets/images/Chicken-Tikka.jpg',
+                                            fit: BoxFit.cover,
+                                          ),
+                                          const SizedBox(height: 8),
+                                          const Text(
+                                            'Chicken tikka',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                          const SizedBox(height: 8),
+                                          const Text(
+                                            '\$10.00',
+                                            style: TextStyle(
+                                                color: Colors.green,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          const SizedBox(height: 8),
+                                          TextButton.icon(
+                                            onPressed: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const Productpage()),
+                                              );
+                                            },
+                                            icon: const Icon(
+                                                Icons.shopping_cart,
+                                                color: Color.fromARGB(
+                                                    255, 175, 76, 111)),
+                                            label: const Text('Add to Cart',
+                                                style: TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 0, 0, 0))),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ]) // Home button
+                            )
                       ]),
               ),
               // Bottom Navigation Bar
