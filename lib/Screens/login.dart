@@ -36,6 +36,7 @@ class _LoginPageState extends State<LoginPage> {
                 'Login',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
+              
               const SizedBox(height: 20),
               TextField(
                 onChanged: (value) {
