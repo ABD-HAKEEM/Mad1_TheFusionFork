@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:the_fution_fork_mad/Screens/AccountScreen.dart';
-import 'package:the_fution_fork_mad/Screens/CartsScreen.dart';
-import 'package:the_fution_fork_mad/Screens/Menupage.dart';
+import 'package:the_fution_fork_mad/Screens/accountscreen.dart';
+import 'package:the_fution_fork_mad/Screens/cartsscreen.dart';
+import 'package:the_fution_fork_mad/Screens/menupage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class homepage extends StatefulWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:the_fution_fork_mad/Screens/AccountScreen.dart';
-import 'package:the_fution_fork_mad/screens/HomeScreen.dart';
+import 'package:the_fution_fork_mad/Screens/accountscreen.dart';
+import 'package:the_fution_fork_mad/screens/homescreen.dart';
 import 'Menupage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
