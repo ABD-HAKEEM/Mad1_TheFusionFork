@@ -4,7 +4,6 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        // Update this to at least 8.2.1 for compatibility with Java 21+
         classpath 'com.android.tools.build:gradle:8.0.2'
 
     }
