@@ -30,12 +30,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  shared_preferences: ^2.1.1 # or the latest version
-
+  
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
+  shared_preferences: ^2.1.1 # or the latest version
 
 dev_dependencies:
   flutter_test:
@@ -89,16 +89,27 @@ flutter:
     - assets/images/Shushi1.jpeg
     - assets/images/pizza1.jpeg
     - assets/images/poster.png
-    
- 
+    - assets/images/logo.png
 
   fonts:
-    - family: SourGummy-Italic
+    - family: Roboto-Italic
       fonts:
-        - asset: assets/fonts/SourGummy_Expanded-Regular.ttf
-    - family: SourGummy-Medium
+        - asset: assets/fonts/Roboto-Italic.ttf
+    - family: Roboto-Medium
       fonts:
-        - asset: assets/fonts/SourGummy-Medium.ttf
+        - asset: assets/fonts/Roboto-Medium.ttf
+    - family: Roboto-Regular
+      fonts:
+        - asset: assets/fonts/Roboto-Regular.ttf
+    - family: Roboto-Bold
+      fonts:
+        - asset: assets/fonts/Roboto-Bold.ttf
+    - family: Roboto-Black
+      fonts:
+        - asset: assets/fonts/Roboto-Black.ttf
+    - family: Roboto-Thin
+      fonts:
+        - asset: assets/fonts/Roboto-Thin.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package

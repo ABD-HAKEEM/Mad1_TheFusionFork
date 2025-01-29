@@ -330,9 +330,9 @@ class _MenuPageState extends State<MenuPage> {
                                                               color: Color
                                                                   .fromARGB(
                                                                       255,
-                                                                      0,
-                                                                      0,
-                                                                      0))),
+                                                                      160,
+                                                                      28,
+                                                                      28))),
                                                     ),
                                                     TextButton.icon(
                                                       onPressed: () {
@@ -358,9 +358,9 @@ class _MenuPageState extends State<MenuPage> {
                                                               color: Color
                                                                   .fromARGB(
                                                                       255,
-                                                                      0,
-                                                                      0,
-                                                                      0))),
+                                                                      160,
+                                                                      28,
+                                                                      28))),
                                                     )
                                                   ],
                                                 )
@@ -468,9 +468,9 @@ class _MenuPageState extends State<MenuPage> {
                                                                 color: Color
                                                                     .fromARGB(
                                                                         255,
-                                                                        0,
-                                                                        0,
-                                                                        0))),
+                                                                        160,
+                                                                        28,
+                                                                        28))),
                                                       ),
                                                       TextButton.icon(
                                                         onPressed: () {
@@ -497,9 +497,9 @@ class _MenuPageState extends State<MenuPage> {
                                                                 color: Color
                                                                     .fromARGB(
                                                                         255,
-                                                                        0,
-                                                                        0,
-                                                                        0))),
+                                                                        160,
+                                                                        28,
+                                                                        28))),
                                                       )
                                                     ],
                                                   )
@@ -604,9 +604,9 @@ class _MenuPageState extends State<MenuPage> {
                                                                 color: Color
                                                                     .fromARGB(
                                                                         255,
-                                                                        0,
-                                                                        0,
-                                                                        0))),
+                                                                        160,
+                                                                        28,
+                                                                        28))),
                                                       ),
                                                       TextButton.icon(
                                                         onPressed: () {
@@ -633,9 +633,9 @@ class _MenuPageState extends State<MenuPage> {
                                                                 color: Color
                                                                     .fromARGB(
                                                                         255,
-                                                                        0,
-                                                                        0,
-                                                                        0))),
+                                                                        160,
+                                                                        28,
+                                                                        28))),
                                                       )
                                                     ],
                                                   )

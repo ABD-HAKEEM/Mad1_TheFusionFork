@@ -109,9 +109,12 @@ class _HomepageState extends State<homepage> {
                     Text(
                       'Welcome to The Fution Fork',
                       style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 20,
-                      ),
+                          color: Colors.grey,
+                          fontSize: 20,
+                          fontFamily:
+                              'Roboto-Regular' // Replace with your font file path
+
+                          ),
                     ),
                     SizedBox(height: 4), // Small space between the two texts
                     Text(
@@ -120,6 +123,7 @@ class _HomepageState extends State<homepage> {
                         color: Colors.black,
                         fontSize: 14, // Adjusted font size
                         fontWeight: FontWeight.bold,
+                        fontFamily: 'Roboto-Italic',
                       ),
                     ),
                   ],
@@ -463,6 +467,7 @@ class _HomepageState extends State<homepage> {
                     style: TextStyle(
                       fontSize: 12,
                       color: Colors.grey,
+                      fontFamily: 'Roboto-regular',
                     ),
                   ),
                   const SizedBox(

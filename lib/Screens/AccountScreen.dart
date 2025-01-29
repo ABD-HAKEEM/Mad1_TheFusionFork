@@ -310,8 +310,7 @@ class _AccpageState extends State<Accpage> {
                             TextButton(
                               onPressed: () {
                                 // Handle registration logic with _username, _email, and _password
-                                print(
-                                    'Password: $_password');
+                                print('Password: $_password');
                                 Navigator.pop(context);
                               },
                               child: const Text('Change Password'),
@@ -376,7 +375,6 @@ class _AccpageState extends State<Accpage> {
             child: Text(
               '© 2025 Abdul Hakeem. All rights reserved.',
               style: TextStyle(
-                color: Color.fromARGB(255, 0, 0, 0),
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
               ),
