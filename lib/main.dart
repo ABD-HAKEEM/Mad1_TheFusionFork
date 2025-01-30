@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: Image.asset(
             'assets/images/logo.png',
-            height: 40, // Adjust the height as needed
+            height: 40, 
           ),
           centerTitle: true,
         ),

@@ -21,19 +21,18 @@ class Productpage extends StatelessWidget {
           ),
           body: OrientationBuilder(
             builder: (context, orientation) {
-              // In portrait mode, we show a single column layout
               if (orientation == Orientation.portrait) {
                 return Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      // Image of the burger (portrait layout)
+                      // Image of the burger
                       Stack(
                         alignment: Alignment.center,
                         children: [
                           Image.asset(
-                            'assets/images/burgeranm.png', // Make sure to add an image in the assets folder
+                            'assets/images/burgeranm.png',
                             width: double.infinity,
                             height: 400,
                             fit: BoxFit.cover,
@@ -104,19 +103,17 @@ class Productpage extends StatelessWidget {
                   ),
                 );
               } else {
-                // In landscape mode
                 return Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Row(
                     children: <Widget>[
-                      // Left side - Image of the burger (landscape layout)
                       Expanded(
                         flex: 1,
                         child: Stack(
                           alignment: Alignment.center,
                           children: [
                             Image.asset(
-                              'assets/images/burgeranm.png', // Make sure to add an image in the assets folder
+                              'assets/images/burgeranm.png',
                               width: double.infinity,
                               height: 250,
                               fit: BoxFit.cover,
@@ -133,7 +130,6 @@ class Productpage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 16),
-                      // Right side - Text and buttons
                       Expanded(
                         flex: 1,
                         child: Column(

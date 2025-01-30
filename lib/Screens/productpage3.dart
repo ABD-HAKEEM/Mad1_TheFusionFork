@@ -9,7 +9,7 @@ class Productpage3 extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
 
-    //final bool isDarkMode = brightness == Brightness.dark;
+
     return MaterialApp(
         themeMode: themeProvider.themeMode,
         theme: ThemeData.light(),
@@ -25,12 +25,12 @@ class Productpage3 extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                // Image of the burger (similar to the floating burger effect)
+                // Image of the burger 
                 Stack(
                   alignment: Alignment.center,
                   children: [
                     Image.asset(
-                      'assets/images/pizza1.jpeg', // Make sure to add an image in the assets folder
+                      'assets/images/pizza1.jpeg', 
                       width: double.infinity,
                       height: 400,
                       fit: BoxFit.cover,
