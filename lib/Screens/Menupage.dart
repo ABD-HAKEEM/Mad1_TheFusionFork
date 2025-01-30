@@ -115,9 +115,7 @@ class _MenuPageState extends State<MenuPage> {
 
                           // Horizontal List of Items
                           Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal:
-                                    24), // Equivalent to px-6 in Tailwind CSS
+                            padding: const EdgeInsets.symmetric(horizontal: 24),
                             child: SizedBox(
                               height: 100,
                               child: ListView(
@@ -250,9 +248,7 @@ class _MenuPageState extends State<MenuPage> {
                             child: Column(
                               // Wrap the widgets in a Column
                               children: [
-                                const SizedBox(
-                                    height:
-                                        16), // Correct placement for SizedBox (within the Column)
+                                const SizedBox(height: 16),
                                 GestureDetector(
                                   onTap: () {
                                     Navigator.push(
@@ -278,9 +274,7 @@ class _MenuPageState extends State<MenuPage> {
                                             height: 180,
                                             fit: BoxFit.cover,
                                           ),
-                                          const SizedBox(
-                                              width:
-                                                  16), // Space between image and text
+                                          const SizedBox(width: 16),
                                           Expanded(
                                             child: Column(
                                               crossAxisAlignment:
@@ -394,7 +388,6 @@ class _MenuPageState extends State<MenuPage> {
                                         ),
                                       );
                                     },
-                                    // Correct placement for SizedBox (within the Column)
                                     child: Card(
                                       elevation: 5,
                                       shape: RoundedRectangleBorder(
@@ -413,7 +406,7 @@ class _MenuPageState extends State<MenuPage> {
                                             const SizedBox(
                                                 width:
                                                     16), // Space between image and text
-                                            // Column for text information
+
                                             Expanded(
                                               child: Column(
                                                 crossAxisAlignment:
@@ -519,7 +512,6 @@ class _MenuPageState extends State<MenuPage> {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Column(
-                              // Wrap the widgets in a Column
                               children: [
                                 const SizedBox(height: 16),
                                 GestureDetector(
@@ -658,7 +650,7 @@ class _MenuPageState extends State<MenuPage> {
                           reverse: true, // Enables right-to-left scrolling
                           child: Row(
                             mainAxisAlignment:
-                                MainAxisAlignment.center, // Centers vertically
+                                MainAxisAlignment.center, // Centers
                             crossAxisAlignment: CrossAxisAlignment
                                 .center, // Centers horizontally
 
@@ -935,11 +927,8 @@ class _MenuPageState extends State<MenuPage> {
                             scrollDirection: Axis.horizontal,
                             reverse: true, // Enables right-to-left scrolling
                             child: Row(
-                                mainAxisAlignment: MainAxisAlignment
-                                    .center, // Centers vertically
-                                crossAxisAlignment: CrossAxisAlignment
-                                    .center, // Centers horizontally
-
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Card(
                                     elevation: 5,
@@ -1211,16 +1200,14 @@ class _MenuPageState extends State<MenuPage> {
                                       ),
                                     ),
                                   ),
-                                ]) // Home button
-                            )
+                                ]))
                       ]),
               ),
               // Bottom Navigation Bar
               bottomNavigationBar: BottomNavigationBar(
                 type: BottomNavigationBarType.fixed,
-                currentIndex:
-                    _selectedIndex, // Ensure the selected index is updated
-                onTap: _onItemTapped, // Handle item tap
+                currentIndex: _selectedIndex,
+                onTap: _onItemTapped,
                 items: const [
                   BottomNavigationBarItem(
                     icon: Icon(Icons.home),

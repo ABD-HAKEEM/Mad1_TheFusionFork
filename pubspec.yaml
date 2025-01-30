@@ -54,9 +54,7 @@ flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
   image_path: "assets/images/logo.png"
-  min_sdk_android: 21 # Minimum Android SDK version
-  remove_alpha_ios: true # Remove transparency for iOS
-
+ 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

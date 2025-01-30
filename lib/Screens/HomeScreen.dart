@@ -162,16 +162,14 @@ class _HomepageState extends State<homepage> {
                   ),
 
                   Padding(
-                    padding: const EdgeInsets.all(
-                        5), // Padding of 5 pixels on all sides
+                    padding: const EdgeInsets.all(5),
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(
-                          5), // Radius for rounded corners
+                      borderRadius: BorderRadius.circular(5),
                       child: Image.asset(
                         'assets/images/poster.png', // Image path
                         height: 250,
                         width: 600,
-                        fit: BoxFit.cover, // Ensure the image scales correctly
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),
@@ -196,7 +194,6 @@ class _HomepageState extends State<homepage> {
                               mainAxisAlignment: MainAxisAlignment
                                   .center, // Centers the columns horizontally
                               children: [
-                                // First Row: 2 Cards
                                 SizedBox(
                                   width: 150,
                                   child: Column(
@@ -207,7 +204,13 @@ class _HomepageState extends State<homepage> {
                                       const Text("\$10.99"),
                                       ElevatedButton(
                                         onPressed: () {
-                                          // Add to cart functionality
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            const SnackBar(
+                                              content: Text(
+                                                  'Product Added To Cart!'),
+                                            ),
+                                          );
                                         },
                                         child: const Text("Add to Cart"),
                                       ),
@@ -225,7 +228,13 @@ class _HomepageState extends State<homepage> {
                                       const Text("\$10.99"),
                                       ElevatedButton(
                                         onPressed: () {
-                                          // Add to cart functionality
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            const SnackBar(
+                                              content: Text(
+                                                  'Product Added To Cart!'),
+                                            ),
+                                          );
                                         },
                                         child: const Text("Add to Cart"),
                                       ),
@@ -274,7 +283,6 @@ class _HomepageState extends State<homepage> {
                               mainAxisAlignment: MainAxisAlignment
                                   .center, // Centers the columns horizontally
                               children: [
-                                // First Column with a fixed width and gap
                                 SizedBox(
                                   width: 150,
                                   child: Column(
@@ -285,7 +293,13 @@ class _HomepageState extends State<homepage> {
                                       const Text("\$10.99"),
                                       ElevatedButton(
                                         onPressed: () {
-                                          // Add to cart functionality
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            const SnackBar(
+                                              content: Text(
+                                                  'Product Added To Cart!'),
+                                            ),
+                                          );
                                         },
                                         child: const Text("Add to Cart"),
                                       ),
@@ -303,7 +317,13 @@ class _HomepageState extends State<homepage> {
                                       const Text("\$10.99"),
                                       ElevatedButton(
                                         onPressed: () {
-                                          // Add to cart functionality
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            const SnackBar(
+                                              content: Text(
+                                                  'Product Added To Cart!'),
+                                            ),
+                                          );
                                         },
                                         child: const Text("Add to Cart"),
                                       ),
@@ -322,7 +342,13 @@ class _HomepageState extends State<homepage> {
                                       const Text("\$10.99"),
                                       ElevatedButton(
                                         onPressed: () {
-                                          // Add to cart functionality
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            const SnackBar(
+                                              content: Text(
+                                                  'Product Added To Cart!'),
+                                            ),
+                                          );
                                         },
                                         child: const Text("Add to Cart"),
                                       ),
@@ -331,8 +357,7 @@ class _HomepageState extends State<homepage> {
                                 ),
                                 const SizedBox(width: 20),
                                 SizedBox(
-                                  width:
-                                      150, // Set a custom width for the column
+                                  width: 150,
                                   child: Column(
                                     children: [
                                       Image.asset('assets/images/pizza.jpg',
@@ -341,7 +366,13 @@ class _HomepageState extends State<homepage> {
                                       const Text("\$10.99"),
                                       ElevatedButton(
                                         onPressed: () {
-                                          // Add to cart functionality
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            const SnackBar(
+                                              content: Text(
+                                                  'Product Added To Cart!'),
+                                            ),
+                                          );
                                         },
                                         child: const Text("Add to Cart"),
                                       ),
@@ -368,7 +399,6 @@ class _HomepageState extends State<homepage> {
                         shrinkWrap: true,
                         physics: const BouncingScrollPhysics(),
                         children: const [
-                          // First Item - Pizza
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 8),
                             child: Column(
@@ -389,7 +419,6 @@ class _HomepageState extends State<homepage> {
                             ),
                           ),
                           SizedBox(height: 8),
-                          // Second Item - Burger
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 8),
                             child: Column(
@@ -409,7 +438,6 @@ class _HomepageState extends State<homepage> {
                             ),
                           ),
                           SizedBox(height: 8),
-                          // Third Item - Lasagna
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 8),
                             child: Column(
@@ -429,7 +457,6 @@ class _HomepageState extends State<homepage> {
                             ),
                           ),
                           SizedBox(height: 8),
-                          // Fourth Item - Risotto
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 8),
                             child: Column(
@@ -485,8 +512,7 @@ class _HomepageState extends State<homepage> {
             // Bottom Navigation Bar
             bottomNavigationBar: BottomNavigationBar(
               type: BottomNavigationBarType.fixed,
-              currentIndex:
-                  _selectedIndex, // Ensure the selected index is updated
+              currentIndex: _selectedIndex,
               onTap: _onItemTapped,
               items: const [
                 BottomNavigationBarItem(

@@ -64,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
                         _password = value;
                       });
                     },
-                    obscureText: true, // Secure password input
+                    obscureText: true, 
                     decoration: const InputDecoration(
                       labelText: 'Password',
                       border: OutlineInputBorder(),

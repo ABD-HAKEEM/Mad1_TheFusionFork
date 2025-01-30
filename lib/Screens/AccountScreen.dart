@@ -59,7 +59,7 @@ class _AccpageState extends State<Accpage> {
         );
         break;
       case 3:
-        // Do nothing since we're already on the Account page.
+        //  we're already on the Account page.
         break;
       default:
         break;
@@ -71,6 +71,7 @@ class _AccpageState extends State<Accpage> {
     final themeProvider = Provider.of<ThemeProvider>(context);
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       themeMode: themeProvider.themeMode,
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
@@ -176,7 +177,7 @@ class _AccpageState extends State<Accpage> {
                     );
                   },
                 );
-              }, // Show registration form directly here
+              },
             ),
             // Change Email ListTile
             ListTile(
@@ -232,7 +233,6 @@ class _AccpageState extends State<Accpage> {
                         // Register button
                         TextButton(
                           onPressed: () {
-                            // Handle registration logic with _username, _email, and _password
                             print('Old Email: $_oldemail, Email: $_email');
                             Navigator.pop(context);
                           },
@@ -304,7 +304,6 @@ class _AccpageState extends State<Accpage> {
                             // Register button
                             TextButton(
                               onPressed: () {
-                                // Handle registration logic with _username, _email, and _password
                                 print('Password: $_password');
                                 Navigator.pop(context);
                               },
@@ -323,7 +322,11 @@ class _AccpageState extends State<Accpage> {
               leading: const Icon(Icons.notifications),
               title: const Text('Enable Notifications'),
               onTap: () {
-                // Add functionality to enable or disable notifications
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('successfully Notifications Enable'),
+                  ),
+                );
               },
             ),
             const Divider(),
@@ -335,7 +338,11 @@ class _AccpageState extends State<Accpage> {
               leading: const Icon(Icons.privacy_tip),
               title: const Text('Change Privacy Settings'),
               onTap: () {
-                // Add functionality for privacy settings
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Successfully Changed Privacy Settings'),
+                  ),
+                );
               },
             ),
           ],

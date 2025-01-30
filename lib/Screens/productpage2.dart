@@ -24,12 +24,12 @@ class Productpage2 extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                // Image of the burger (similar to the floating burger effect)
+                // Image of the burger
                 Stack(
                   alignment: Alignment.center,
                   children: [
                     Image.asset(
-                      'assets/images/Shushi1.jpeg', // Make sure to add an image in the assets folder
+                      'assets/images/Shushi1.jpeg',
                       width: double.infinity,
                       //height: 400,
                       fit: BoxFit.cover,
@@ -73,7 +73,6 @@ class Productpage2 extends StatelessWidget {
 
                 const Row(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  // ignore: prefer_const_literals_to_create_immutables
                   children: <Widget>[
                     Icon(Icons.local_dining),
                     SizedBox(width: 10),
