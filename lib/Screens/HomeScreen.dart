@@ -132,9 +132,13 @@ class _HomepageState extends State<homepage> {
                 ),
               ),
               actions: [
-                Switch(
-                  value: themeProvider.themeMode == ThemeMode.dark,
-                  onChanged: (value) {
+                IconButton(
+                  icon: Icon(
+                    themeProvider.themeMode == ThemeMode.dark
+                        ? Icons.dark_mode
+                        : Icons.light_mode,
+                  ),
+                  onPressed: () {
                     themeProvider.toggleTheme();
                   },
                 )
