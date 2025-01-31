@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:the_fution_fork_mad/Screens/accountscreen.dart';
-import 'package:the_fution_fork_mad/Screens/cartsscreen.dart';
-import 'package:the_fution_fork_mad/Screens/login.dart';
-import 'package:the_fution_fork_mad/Screens/menupage.dart';
-import 'package:the_fution_fork_mad/Screens/productpage.dart';
-import 'package:the_fution_fork_mad/Screens/productpage2.dart';
-import 'package:the_fution_fork_mad/Screens/productpage3.dart';
+import 'package:the_fution_fork_mad/views/Screens/accountscreen.dart';
+import 'package:the_fution_fork_mad/views/Screens/cartsscreen.dart';
+import 'package:the_fution_fork_mad/views/Screens/login.dart';
+import 'package:the_fution_fork_mad/views/Screens/menupage.dart';
+import 'package:the_fution_fork_mad/views/Screens/productpage.dart';
+import 'package:the_fution_fork_mad/views/Screens/productpage2.dart';
+import 'package:the_fution_fork_mad/views/Screens/productpage3.dart';
 import 'package:the_fution_fork_mad/theme_provider.dart';
 
 void main() {
@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: Image.asset(
             'assets/images/logo.png',
-            height: 40, 
+            height: 40,
           ),
           centerTitle: true,
         ),

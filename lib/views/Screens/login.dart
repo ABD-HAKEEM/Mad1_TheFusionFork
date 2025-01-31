@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:the_fution_fork_mad/Screens/homescreen.dart';
+import 'package:the_fution_fork_mad/views/Screens/homescreen.dart';
 import 'package:the_fution_fork_mad/theme_provider.dart';
 
 class LoginPage extends StatefulWidget {
@@ -64,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
                         _password = value;
                       });
                     },
-                    obscureText: true, 
+                    obscureText: true,
                     decoration: const InputDecoration(
                       labelText: 'Password',
                       border: OutlineInputBorder(),

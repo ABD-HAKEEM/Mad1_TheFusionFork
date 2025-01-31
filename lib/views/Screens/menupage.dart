@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:the_fution_fork_mad/Screens/accountscreen.dart';
-import 'package:the_fution_fork_mad/Screens/cartsscreen.dart';
-import 'package:the_fution_fork_mad/Screens/productpage2.dart';
-import 'package:the_fution_fork_mad/screens/homescreen.dart';
-import 'package:the_fution_fork_mad/screens/productpage.dart';
+import 'package:the_fution_fork_mad/views/Screens/accountscreen.dart';
+import 'package:the_fution_fork_mad/views/Screens/cartsscreen.dart';
+import 'package:the_fution_fork_mad/views/Screens/productpage2.dart';
+import 'package:the_fution_fork_mad/views/screens/homescreen.dart';
+import 'package:the_fution_fork_mad/views/screens/productpage.dart';
 import 'package:the_fution_fork_mad/theme_provider.dart';
 
 class MenuPage extends StatefulWidget {
