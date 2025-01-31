@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:the_fution_fork_mad/Screens/accountscreen.dart';
-import 'package:the_fution_fork_mad/Screens/cartsscreen.dart';
-import 'package:the_fution_fork_mad/Screens/menupage.dart';
+import 'package:the_fution_fork_mad/views/Screens/accountscreen.dart';
+import 'package:the_fution_fork_mad/views/Screens/cartsscreen.dart';
+import 'package:the_fution_fork_mad/views/Screens/menupage.dart';
 import 'package:the_fution_fork_mad/theme_provider.dart';
 
 class homepage extends StatefulWidget {
@@ -109,7 +109,7 @@ class _HomepageState extends State<homepage> {
                       CrossAxisAlignment.center, // Horizontally center the text
                   children: [
                     Text(
-                      'Welcome to The Fution Fork',
+                      'Welcome to The Fusion Fork',
                       style: TextStyle(
                           color: Colors.grey,
                           fontSize: 20,

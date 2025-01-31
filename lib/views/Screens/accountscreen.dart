@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:the_fution_fork_mad/Screens/CartsScreen.dart';
-import 'package:the_fution_fork_mad/screens/homescreen.dart';
+import 'package:the_fution_fork_mad/views/Screens/CartsScreen.dart';
+import 'package:the_fution_fork_mad/views/screens/homescreen.dart';
 import 'package:the_fution_fork_mad/theme_provider.dart';
-import 'Menupage.dart';
+import '../../views/Screens/Menupage.dart';
 
 void main() {
   runApp(const MyApp());
