@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:the_fution_fork_mad/views/Screens/homescreen.dart';
 import 'package:the_fution_fork_mad/theme_provider.dart';
+import 'package:the_fution_fork_mad/views/Screens/registration.dart'
+    show Registration;
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -106,73 +108,10 @@ class _LoginPageState extends State<LoginPage> {
                   const Text("Don't have an account?"),
                   ElevatedButton(
                     onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            title: const Text('Register Account'),
-                            content: SingleChildScrollView(
-                              child: Column(
-                                children: [
-                                  TextField(
-                                    decoration: const InputDecoration(
-                                      labelText: 'Username',
-                                      border: OutlineInputBorder(),
-                                    ),
-                                    onChanged: (value) {
-                                      setState(() {
-                                        _username = value;
-                                      });
-                                    },
-                                  ),
-                                  const SizedBox(height: 10),
-                                  TextField(
-                                    keyboardType: TextInputType.emailAddress,
-                                    decoration: const InputDecoration(
-                                      labelText: 'Email',
-                                      border: OutlineInputBorder(),
-                                    ),
-                                    onChanged: (value) {
-                                      setState(() {});
-                                    },
-                                  ),
-                                  const SizedBox(height: 10),
-                                  TextField(
-                                    obscureText: true,
-                                    decoration: const InputDecoration(
-                                      labelText: 'Password',
-                                      border: OutlineInputBorder(),
-                                    ),
-                                    onChanged: (value) {
-                                      setState(() {
-                                        _password = value;
-                                      });
-                                    },
-                                  ),
-                                ],
-                              ),
-                            ),
-                            actions: [
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                child: const Text('Cancel'),
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      content: Text('Registration successful!'),
-                                      duration: Duration(seconds: 2),
-                                    ),
-                                  );
-                                },
-                                child: const Text('Register'),
-                              ),
-                            ],
-                          );
-                        },
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const Registration()),
                       );
                     },
                     child: const Text('Sign Up'),

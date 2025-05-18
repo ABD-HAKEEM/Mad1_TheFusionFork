@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:the_fution_fork_mad/views/Screens/CartsScreen.dart';
+import 'package:the_fution_fork_mad/views/Screens/CartPage.dart';
 import 'package:the_fution_fork_mad/views/screens/homescreen.dart';
 import 'package:the_fution_fork_mad/theme_provider.dart';
 import '../../views/Screens/Menupage.dart';
@@ -53,9 +53,12 @@ class _AccpageState extends State<Accpage> {
         );
         break;
       case 2:
-        Navigator.pushReplacement(
+        Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const CartPage()),
+          MaterialPageRoute(
+              builder: (context) => const Cart(
+                    item: {},
+                  )),
         );
         break;
       case 3:

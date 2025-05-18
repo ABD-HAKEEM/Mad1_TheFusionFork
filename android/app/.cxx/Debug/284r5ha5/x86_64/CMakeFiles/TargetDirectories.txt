@@ -1,0 +1,2 @@
+/Users/hakeemfareed01gmail.com/Documents/Mad1_TheFusionFork/android/app/.cxx/Debug/284r5ha5/x86_64/CMakeFiles/edit_cache.dir
+/Users/hakeemfareed01gmail.com/Documents/Mad1_TheFusionFork/android/app/.cxx/Debug/284r5ha5/x86_64/CMakeFiles/rebuild_cache.dir

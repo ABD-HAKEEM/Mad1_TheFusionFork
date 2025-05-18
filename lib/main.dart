@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:the_fution_fork_mad/views/Screens/accountscreen.dart';
 import 'package:the_fution_fork_mad/views/Screens/cartsscreen.dart';
+import 'package:the_fution_fork_mad/views/Screens/homescreen.dart';
 import 'package:the_fution_fork_mad/views/Screens/login.dart';
 import 'package:the_fution_fork_mad/views/Screens/menupage.dart';
-import 'package:the_fution_fork_mad/views/Screens/productpage.dart';
-import 'package:the_fution_fork_mad/views/Screens/productpage2.dart';
-import 'package:the_fution_fork_mad/views/Screens/productpage3.dart';
 import 'package:the_fution_fork_mad/theme_provider.dart';
 
 void main() {
@@ -40,16 +38,15 @@ class MyApp extends StatelessWidget {
           ),
           centerTitle: true,
         ),
-        body: const LoginPage(),
+        body: const homepage(),
       ),
       routes: {
-        '/cart': (context) => const CartPage(),
+        '/cart': (context) => const CartPage(
+              item: {},
+            ),
         '/account': (context) => const Accpage(),
         '/menupage': (context) => const MenuPage(),
-        '/Productpage': (context) => const Productpage(),
-        '/login': (context) => const LoginPage(),
-        '/Productpage2': (context) => const Productpage2(),
-        '/Productpage3': (context) => const Productpage3(),
+        '/login': (context) => LoginPage(),
       },
     );
   }

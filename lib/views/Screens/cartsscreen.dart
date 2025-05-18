@@ -1,383 +1,219 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:the_fution_fork_mad/views/Screens/accountscreen.dart';
-import 'package:the_fution_fork_mad/views/screens/homescreen.dart';
-import 'package:the_fution_fork_mad/theme_provider.dart';
-import 'Menupage.dart';
+import 'package:http/http.dart' as http;
+import 'package:the_fution_fork_mad/views/Screens/cart_manager.dart';
 
 class CartPage extends StatefulWidget {
-  const CartPage({super.key});
+  final Map<String, dynamic> item;
+
+  const CartPage({super.key, required this.item});
 
   @override
-  _CartscreenState createState() => _CartscreenState();
+  State<CartPage> createState() => _CartPageState();
 }
 
-class _CartscreenState extends State<CartPage> {
-  int _selectedIndex = 1;
+class _CartPageState extends State<CartPage> {
   String? selectedPayment;
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+  final phoneController = TextEditingController();
+  final addressController = TextEditingController();
 
-  // Function to handle item tap for BottomNavigationBar
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+  Future<void> placeOrder() async {
+    final items = CartManager.items;
+    if (items.isEmpty) return;
 
-    switch (index) {
-      case 0:
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const homepage()));
-        break;
-      case 1:
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const MenuPage()));
-        break;
-      case 3:
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const Accpage()));
-        break;
-      default:
-        break;
+    final itemIds = items.map((e) => e['id'].toString()).join(',');
+    final quantities = List.filled(items.length, '1').join(',');
+    final itemList = jsonEncode(items);
+
+    final response = await http.post(
+      Uri.parse('http://10.0.2.2:8000/api/add-order'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({
+        'email': emailController.text,
+        'mobile_number': phoneController.text,
+        'first_name': nameController.text.split(' ').first,
+        'last_name': nameController.text.split(' ').length > 1
+            ? nameController.text.split(' ').last
+            : '',
+        'address': addressController.text,
+        'country': 'Sri Lanka',
+        'city': 'Colombo',
+        'payment_method': selectedPayment ?? 'cod',
+        'amount': CartManager.totalPrice,
+        'vat_amount': 0.0,
+        'shipping_fee': 0.0,
+        'order_total': CartManager.totalPrice,
+        'item_ids': itemIds,
+        'quantities': quantities,
+        'items': itemList,
+      }),
+    );
+
+    if (response.statusCode == 200 &&
+        jsonDecode(response.body)['status'] == 'success') {
+      CartManager.clearCart();
+      setState(() {});
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+            content:
+                Text(jsonDecode(response.body)['message'] ?? 'Order placed')),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+            content:
+                Text(jsonDecode(response.body)['message'] ?? 'Order failed')),
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
+    final items = CartManager.items;
 
-    return MaterialApp(
-      themeMode: themeProvider.themeMode,
-      theme: ThemeData.light(),
-      darkTheme: ThemeData.dark(),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            'Checkout',
-            style: TextStyle(color: Colors.black),
-          ),
-          backgroundColor: Colors.white,
-          elevation: 0,
-          iconTheme: const IconThemeData(color: Colors.black),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Checkout'),
+        backgroundColor: Colors.orange,
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text('Your Items',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 10),
+            ...items.map((item) => _buildCartItem(item)).toList(),
+            const SizedBox(height: 20),
+            Text(
+              'Total: \$${CartManager.totalPrice.toStringAsFixed(2)}',
+              style: const TextStyle(
+                fontSize: 18,
+                color: Colors.green,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 20),
+            _buildTextField('Full Name', nameController),
+            _buildTextField('Email', emailController),
+            _buildTextField('Contact Number', phoneController),
+            _buildTextField('Shipping Address', addressController),
+            const SizedBox(height: 20),
+            const Text('Payment Method:',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            _buildPaymentOption('Credit/Debit Card', 'card', Icons.credit_card),
+            _buildPaymentOption(
+                'Wallet', 'wallet', Icons.account_balance_wallet),
+            _buildPaymentOption('Cash on Delivery', 'cod', Icons.money),
+            _buildPaymentOption(
+                'KOKO: Buy Now Pay Later', 'koko', Icons.watch_later),
+            _buildPaymentOption(
+                'Split or Group Payment', 'spg', Icons.splitscreen),
+            _buildPaymentOption('Mintpay', 'mint', Icons.energy_savings_leaf),
+            const SizedBox(height: 20),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () => placeOrder(),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green,
+                  padding: const EdgeInsets.all(16),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                ),
+                child:
+                    const Text('Place Order', style: TextStyle(fontSize: 16)),
+              ),
+            )
+          ],
         ),
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
+      ),
+    );
+  }
+
+  Widget _buildCartItem(Map<String, dynamic> item) {
+    final price = double.tryParse(item['price'].toString()) ?? 0.0;
+
+    return Card(
+      margin: const EdgeInsets.symmetric(vertical: 8),
+      child: Padding(
+        padding: const EdgeInsets.all(8),
+        child: Row(
+          children: [
+            Image.network(
+              'http://10.0.2.2:8000${item['image']}',
+              width: 80,
+              height: 80,
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) =>
+                  const Icon(Icons.fastfood),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Product Listing Section
-                  const Text(
-                    'Your Items',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 10),
-                  Card(
-                    elevation: 3,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          Image.asset(
-                            'assets/images/sushi.jpg',
-                            width: 80,
-                            height: 80,
-                            fit: BoxFit.cover,
-                          ),
-                          const SizedBox(width: 16),
-                          const Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Sushi',
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Text(
-                                  'Qty: 2',
-                                  style: TextStyle(
-                                      fontSize: 14, color: Colors.grey),
-                                ),
-                                Text(
-                                  '\$15.99',
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      color: Colors.green,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const Text(
-                            '\$31.98', // Total price for the item
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: Color.fromARGB(255, 5, 79, 9)),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-
-                  // Full Name
-                  Row(
-                    children: [
-                      const SizedBox(
-                        width: 100,
-                        child: Text(
-                          'Full Name:',
-                          style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: TextField(
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10)),
-                            hintText: 'Enter your Full Name',
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-
-                  // Email Address
-                  Row(
-                    children: [
-                      const SizedBox(
-                        width: 100, 
-                        child: Text(
-                          'Email:',
-                          style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: TextField(
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10)),
-                            hintText: 'Enter your Email',
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-
-                  // Contact Number
-                  Row(
-                    children: [
-                      const SizedBox(
-                        width: 100, 
-                        child: Text(
-                          'Contact No:',
-                          style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: TextField(
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10)),
-                            hintText: 'Enter your Contact No',
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-
-                  // Shipping Address
-                  Row(
-                    children: [
-                      const SizedBox(
-                        width: 100, 
-                        child: Text(
-                          'Address:',
-                          style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: TextField(
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10)),
-                            hintText: 'Enter your Shipping Address',
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-
-                  // Payment Methods Section
-                  const Text(
-                    'Payment Method:',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 10),
-
-                  ListTile(
-                    leading: const Icon(Icons.credit_card),
-                    title: const Text('Credit/Debit Card'),
-                    trailing: Radio<String>(
-                      value: 'card',
-                      groupValue: selectedPayment,
-                      onChanged: (value) {
-                        setState(() {
-                          selectedPayment = value!;
-                        });
-                      },
-                    ),
-                  ),
-                  const Divider(),
-
-                  ListTile(
-                    leading: const Icon(Icons.account_balance_wallet),
-                    title: const Text('Wallet'),
-                    trailing: Radio<String>(
-                      value: 'wallet',
-                      groupValue: selectedPayment,
-                      onChanged: (value) {
-                        setState(() {
-                          selectedPayment = value!;
-                        });
-                      },
-                    ),
-                  ),
-                  const Divider(),
-
-                  ListTile(
-                    leading: const Icon(Icons.money),
-                    title: const Text('Cash on Delivery'),
-                    trailing: Radio<String>(
-                      value: 'cod',
-                      groupValue: selectedPayment,
-                      onChanged: (value) {
-                        setState(() {
-                          selectedPayment = value!;
-                        });
-                      },
-                    ),
-                  ),
-                  const Divider(),
-
-                  ListTile(
-                    leading: const Icon(Icons.watch_later),
-                    title: const Text('KOKO: Buy Now Pay Later'),
-                    trailing: Radio<String>(
-                      value: 'koko',
-                      groupValue: selectedPayment,
-                      onChanged: (value) {
-                        setState(() {
-                          selectedPayment = value!;
-                        });
-                      },
-                    ),
-                  ),
-                  const Divider(),
-
-                  ListTile(
-                    leading: const Icon(Icons.splitscreen),
-                    title: const Text('Split Payment Or Group Payments'),
-                    trailing: Radio<String>(
-                      value: 'spg',
-                      groupValue: selectedPayment,
-                      onChanged: (value) {
-                        setState(() {
-                          selectedPayment = value!;
-                        });
-                      },
-                    ),
-                  ),
-                  const Divider(),
-
-                  ListTile(
-                    leading: const Icon(Icons.energy_savings_leaf),
-                    title: const Text('Mintpay'),
-                    trailing: Radio<String>(
-                      value: 'mint',
-                      groupValue: selectedPayment,
-                      onChanged: (value) {
-                        setState(() {
-                          selectedPayment = value!;
-                        });
-                      },
-                    ),
-                  ),
-                  const Divider(),
-
-                  const SizedBox(height: 20),
-
-                  // Checkout Button
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Order placed successfully!'),
-                          ),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.all(16),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        backgroundColor: Colors.green,
-                      ),
-                      child: const Text(
-                        'Place Order',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                    ),
+                  Text(item['name'] ?? '',
+                      style: const TextStyle(
+                          fontSize: 16, fontWeight: FontWeight.bold)),
+                  const Text('Qty: 1',
+                      style: TextStyle(fontSize: 14, color: Colors.grey)),
+                  IconButton(
+                    icon: const Icon(Icons.delete, color: Colors.red),
+                    onPressed: () {
+                      CartManager.removeItem(item);
+                      setState(() {});
+                    },
                   ),
                 ],
               ),
             ),
-          ),
-        ),
-        // Bottom Navigation Bar
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          currentIndex: _selectedIndex,
-          onTap: _onItemTapped,
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.search),
-              label: 'Browse',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_cart),
-              label: 'Carts',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'Account',
+            Text(
+              '\$${price.toStringAsFixed(2)}',
+              style: const TextStyle(
+                fontSize: 16,
+                color: Colors.green,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildTextField(String label, TextEditingController controller) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: TextField(
+        controller: controller,
+        decoration: InputDecoration(
+          labelText: label,
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPaymentOption(String title, String value, IconData icon) {
+    return Column(
+      children: [
+        ListTile(
+          leading: Icon(icon),
+          title: Text(title),
+          trailing: Radio<String>(
+            value: value,
+            groupValue: selectedPayment,
+            onChanged: (val) {
+              setState(() => selectedPayment = val);
+            },
+          ),
+        ),
+        const Divider(),
+      ],
     );
   }
 }
