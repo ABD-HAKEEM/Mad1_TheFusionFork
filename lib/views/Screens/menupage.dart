@@ -23,7 +23,7 @@ class _MenuPageState extends State<MenuPage> {
   List<dynamic> menuItems = [];
   bool isLoading = true;
   String errorMessage = '';
-  String baseUrl = 'http://10.0.2.2:8000';
+  String baseUrl = 'http://127.0.0.1:8000';
 
   @override
   void initState() {
@@ -36,7 +36,7 @@ class _MenuPageState extends State<MenuPage> {
       final response = await http.get(
         Uri.parse('$baseUrl/api/products'),
         headers: {
-          'Accept': 'application/json',
+          'Accept': 'applicatioxn/json',
         },
       );
 

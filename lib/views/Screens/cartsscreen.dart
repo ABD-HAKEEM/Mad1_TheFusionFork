@@ -13,58 +13,88 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
-  String? selectedPayment;
-  final nameController = TextEditingController();
+  String? selectedPayment = 'cod';
+  final firstNameController = TextEditingController();
+  final lastNameController = TextEditingController();
   final emailController = TextEditingController();
   final phoneController = TextEditingController();
   final addressController = TextEditingController();
 
   Future<void> placeOrder() async {
     final items = CartManager.items;
-    if (items.isEmpty) return;
+    if (items.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Your cart is empty!')),
+      );
+      return;
+    }
+
+    if (emailController.text.isEmpty ||
+        phoneController.text.isEmpty ||
+        firstNameController.text.isEmpty ||
+        lastNameController.text.isEmpty ||
+        addressController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please fill all required fields')),
+      );
+      return;
+    }
 
     final itemIds = items.map((e) => e['id'].toString()).join(',');
     final quantities = List.filled(items.length, '1').join(',');
     final itemList = jsonEncode(items);
 
-    final response = await http.post(
-      Uri.parse('http://10.0.2.2:8000/api/add-order'),
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({
-        'email': emailController.text,
-        'mobile_number': phoneController.text,
-        'first_name': nameController.text.split(' ').first,
-        'last_name': nameController.text.split(' ').length > 1
-            ? nameController.text.split(' ').last
-            : '',
-        'address': addressController.text,
-        'country': 'Sri Lanka',
-        'city': 'Colombo',
-        'payment_method': selectedPayment ?? 'cod',
-        'amount': CartManager.totalPrice,
-        'vat_amount': 0.0,
-        'shipping_fee': 0.0,
-        'order_total': CartManager.totalPrice,
-        'item_ids': itemIds,
-        'quantities': quantities,
-        'items': itemList,
-      }),
-    );
+    final Map<String, dynamic> body = {
+      'email': emailController.text,
+      'mobile_number': phoneController.text,
+      'first_name': firstNameController.text,
+      'last_name': lastNameController.text,
+      'address': addressController.text,
+      'country': 'Sri Lanka',
+      'city': 'Colombo',
+      'payment_method': selectedPayment ?? 'cod',
+      'amount': CartManager.totalPrice,
+      'vat_amount': 0.0,
+      'shipping_fee': 0.0,
+      'order_total': CartManager.totalPrice,
+      'item_ids': itemIds,
+      'quantities': quantities,
+      'items': itemList,
+    };
 
-    if (response.statusCode == 200 &&
-        jsonDecode(response.body)['status'] == 'success') {
-      CartManager.clearCart();
-      setState(() {});
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-            content:
-                Text(jsonDecode(response.body)['message'] ?? 'Order placed')),
+    if (selectedPayment == 'card') {
+      body.addAll({
+        'card_number': '4111111111111111',
+        'card_holder_name':
+            '${firstNameController.text} ${lastNameController.text}',
+        'expiry_month': '12',
+        'expiry_year': '2026',
+      });
+    }
+
+    try {
+      final response = await http.post(
+        Uri.parse('http://127.0.0.1:8000/api/add-order'), // Emulator IP
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(body),
       );
-    } else {
+
+      final responseData = jsonDecode(response.body);
+
+      if (response.statusCode == 200 && responseData['status'] == 'success') {
+        CartManager.clearCart();
+        setState(() {});
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(responseData['message'] ?? 'Order placed')),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(responseData['message'] ?? 'Order failed')),
+        );
+      }
+    } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-            content:
-                Text(jsonDecode(response.body)['message'] ?? 'Order failed')),
+        SnackBar(content: Text('Error: $e')),
       );
     }
   }
@@ -97,10 +127,13 @@ class _CartPageState extends State<CartPage> {
               ),
             ),
             const SizedBox(height: 20),
-            _buildTextField('Full Name', nameController),
-            _buildTextField('Email', emailController),
-            _buildTextField('Contact Number', phoneController),
-            _buildTextField('Shipping Address', addressController),
+            _buildTextField('First Name', firstNameController),
+            _buildTextField('Last Name', lastNameController),
+            _buildTextField('Email', emailController,
+                keyboardType: TextInputType.emailAddress),
+            _buildTextField('Contact Number', phoneController,
+                keyboardType: TextInputType.phone),
+            _buildTextField('Shipping Address', addressController, maxLines: 2),
             const SizedBox(height: 20),
             const Text('Payment Method:',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
@@ -117,7 +150,7 @@ class _CartPageState extends State<CartPage> {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () => placeOrder(),
+                onPressed: placeOrder,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green,
                   padding: const EdgeInsets.all(16),
@@ -185,11 +218,14 @@ class _CartPageState extends State<CartPage> {
     );
   }
 
-  Widget _buildTextField(String label, TextEditingController controller) {
+  Widget _buildTextField(String label, TextEditingController controller,
+      {TextInputType keyboardType = TextInputType.text, int maxLines = 1}) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: TextField(
         controller: controller,
+        keyboardType: keyboardType,
+        maxLines: maxLines,
         decoration: InputDecoration(
           labelText: label,
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
